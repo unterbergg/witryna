@@ -1,0 +1,27 @@
+@import 'variables/variables';
+@import 'assets/fonts/fonts';
+@import 'mixins/breakpoints';
+@import 'resets/resets';
+@import 'components/footer/footer.scss';
+@import 'components/header/header.scss';
+@import 'components/homepage/homepage.scss';
+@import 'components/404/404.scss';
+strong, .bold {
+  font-weight: 700;
+}
+body{
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
+  margin: 0;
+  position: relative;
+  overflow-x: hidden;
+}
+.columnar {
+  grid-template-columns: repeat(4, [col-start] 1fr);
+  @include respond-to(tablet) {
+    grid-template-columns: repeat(12, [col-start] 1fr);
+  }
+  @include respond-to(desktop) {
+    grid-template-columns: repeat(12, [col-start] 1fr);
+  }
+}

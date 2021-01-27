@@ -1,0 +1,47 @@
+.site-header{
+  padding-bottom: 5px;
+  position: relative;
+  .center-wrapper {
+    width: 1200px;
+    margin: 0 auto;
+    .header__columns {
+      padding: 20px 0;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      .header__column {
+        align-items: center;
+        display: flex;
+        flex: 1;
+        .logo {
+          color: #3163DC;
+          font-family: 'Montserrat', sans-serif;
+          font-size: 39px;
+          letter-spacing: 0.15em;
+          font-weight: 800;
+          text-transform: uppercase;
+          margin: 0 auto;
+          text-decoration: none;
+        }
+        .main-navigation{
+          .menu{
+            .menu-item{
+              a{
+                margin-right: 30px;
+                transition: 150ms;
+                font-size: 20px;
+                font-weight: 500;
+                line-height: 130%;
+                color: #000;
+                &:hover{
+                  color: #3163DC;
+                  transition: 150ms;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
