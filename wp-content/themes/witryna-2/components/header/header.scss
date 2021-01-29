@@ -4,6 +4,12 @@
   .center-wrapper {
     width: 1200px;
     margin: 0 auto;
+    @include respond-to(desktop-small) {
+      max-width: 960px;
+    }
+    @include respond-to(tablet) {
+      max-width: 720px;
+    }
     .header__columns {
       padding: 20px 0;
       display: flex;
@@ -22,8 +28,19 @@
           text-transform: uppercase;
           margin: 0 auto;
           text-decoration: none;
+          @include respond-to(desktop-small) {
+            font-size: 30px;
+          }
         }
         .main-navigation{
+          .menu-toggle{
+            @include respond-to(tablet) {
+              background: #3163DC;
+              border-color: #3163DC;
+              color: #fff;
+              outline: none;
+            }
+          }
           .menu{
             .menu-item{
               a{
@@ -36,6 +53,9 @@
                 &:hover{
                   color: #3163DC;
                   transition: 150ms;
+                }
+                @include respond-to(desktop-small) {
+                  font-size: 14px;
                 }
               }
             }

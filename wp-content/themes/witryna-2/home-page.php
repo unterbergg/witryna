@@ -16,7 +16,7 @@ get_header();
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2FEQjYeVYv86TI-kFJ0T4mu52NIKwfTz50Q&usqp=CAU">
                     </div>
                     <div class="content">
-                        <div class="title">Saat Liburan Bareng, Atta Dan Aurel Saat Liburan Bareng, Atta Dan Aurel Sekamar Atau Pisah?</div>
+                        <div class="title">Saat Liburan Bareng Saat Liburan Bareng, Atta Dan Aurel Saat Liburan Bareng, Atta Dan Aurel Sekamar Atau Pisah?</div>
                         <div class="post-date">
                             <i class="far fa-calendar-alt"></i>
                             <span class="date">13 oktober</span>
