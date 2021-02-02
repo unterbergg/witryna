@@ -1,6 +1,14 @@
 .single-preview{
+  .section{
+    @include respond-to(tablet) {
+      padding: 20px 0;
+    }
+  }
   .section_of-2 {
     padding: 20px 0 45px;
+    @include respond-to(tablet) {
+      display: none;
+    }
     .center-wrapper {
       .column_of-2{
         .card {
@@ -13,7 +21,16 @@
 .section-preview{
   padding-bottom: 0;
   .article-section{
+    @include respond-to(tablet) {
+      display: flex;
+    }
     .article-wrapper{
+      @include respond-to(tablet) {
+        width: 70%;
+      }
+      @include respond-to(tablet-small) {
+        width: 100%;
+      }
       .article__heading{
         &:hover{
           .article__image{
@@ -70,8 +87,22 @@
       }
     }
     .sidebar{
+      @include respond-to(tablet) {
+        width: 30%;
+      }
+      @include respond-to(tablet-small) {
+        display: none;
+      }
       .line_of-2{
+        @include respond-to(tablet) {
+          grid-template-columns: repeat(1, 1fr);
+        }
         .card {
+          @include respond-to(tablet) {
+            &:last-child{
+              display: none;
+            }
+          }
           background: #ffffff;
           .card-image{
             img{

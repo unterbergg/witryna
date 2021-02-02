@@ -10,15 +10,58 @@
     @include respond-to(tablet) {
       max-width: 720px;
     }
+    @include respond-to(tablet-small) {
+      max-width: 100%;
+      padding: 0px;
+    }
+    @include respond-to(mobile) {
+      max-width: 100%;
+      padding: 0;
+    }
     .header__columns {
       padding: 20px 0;
       display: flex;
       flex-wrap: nowrap;
       justify-content: space-between;
+      @include respond-to(tablet) {
+        position: relative;
+        padding: 15px 0;
+      }
+      @include respond-to(tablet-small) {
+        padding: 10px 20px;
+      }
+      @include respond-to(mobile) {
+        padding: 10px 10px;
+      }
+      #header-togglers{
+        @include respond-to(tablet) {
+          display: none;
+        }
+      }
+      #header-menu{
+        @include respond-to(tablet) {
+          position: absolute;
+          right: 0;
+          width: 100%;
+          display: flex;
+          text-align: center;
+        }
+      }
+      .logo-wrapper{
+        @include respond-to(tablet) {
+          width: max-content;
+          z-index: 999;
+          flex: 0;
+        }
+      }
       .header__column {
         align-items: center;
         display: flex;
         flex: 1;
+        @include respond-to(tablet) {
+          display: block;
+          flex: 0;
+        }
         .logo {
           color: #3163DC;
           font-family: 'Montserrat', sans-serif;
@@ -31,14 +74,79 @@
           @include respond-to(desktop-small) {
             font-size: 30px;
           }
+          @include respond-to(tablet-small) {
+            font-size: 25px;
+          }
+          @include respond-to(mobile-small) {
+            font-size: 22px;
+          }
+        }
+        .toggled{
+          z-index: 10;
+          .menu-menu-1-container {
+            @include respond-to(tablet) {
+              margin-top: 20px;
+              flex-direction: column;
+              padding: 25px 0 20px;
+              background: #222;
+            }
+            @include respond-to(mobile-small) {
+              margin-top: 10px;
+            }
+            .menu{
+              .menu-item{
+                @include respond-to(tablet) {
+                  width: 100%;
+                  padding: 20px;
+                  margin-right: 0;
+                  background: #222;
+                  text-align: center;
+                }
+                &:hover {
+                  background: #3163DC;
+                }
+                a{
+                  font-size: 32px;
+                  color: #fff;
+                  margin: 0;
+                  &:hover {
+                    color: #fff;
+                  }
+                }
+              }
+            }
+          }
         }
         .main-navigation{
           .menu-toggle{
+            cursor: pointer;
             @include respond-to(tablet) {
               background: #3163DC;
               border-color: #3163DC;
               color: #fff;
               outline: none;
+              width: 40px;
+              height: 40px;
+              margin-left: calc(100% - 40px);
+              position: relative;
+              @include respond-to(tablet-small) {
+                margin-left: calc(100% - 60px);
+              }
+              @include respond-to(mobile) {
+                margin-left: calc(100% - 50px);
+              }
+              &::before{
+                position: absolute;
+                content: '';
+                width: 14px;
+                height: 16px;
+                top: 50%;
+                left: 50%;
+                margin-right: -50%;
+                transform: translate(-50%, -50%);
+                background: url('../witryna-2/assets/header/bars-solid.svg');
+                background-size: cover;
+              }
             }
           }
           .menu{
@@ -57,6 +165,31 @@
                 @include respond-to(desktop-small) {
                   font-size: 14px;
                 }
+              }
+            }
+          }
+        }
+        .main-navigation.toggled{
+          .menu-toggle{
+            @include respond-to(tablet) {
+              background: #3163DC;
+              border-color: #3163DC;
+              color: #fff;
+              outline: none;
+              width: 40px;
+              height: 40px;
+              position: relative;
+              &::before{
+                position: absolute;
+                content: '';
+                width: 12px;
+                height: 16px;
+                top: 50%;
+                left: 50%;
+                margin-right: -50%;
+                transform: translate(-50%, -50%);
+                background: url('../witryna-2/assets/header/times-solid.svg');
+                background-size: cover;
               }
             }
           }
