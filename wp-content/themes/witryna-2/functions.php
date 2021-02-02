@@ -209,3 +209,102 @@ function witryna_theme_scripts() {
     wp_enqueue_script( 'witryna_theme_js', get_template_directory_uri() . '/js/main.js', array('jquery'), false, true );
 }
 add_action( 'wp_enqueue_scripts', 'witryna_theme_scripts' );
+
+function misha_my_load_more_scripts() {
+
+    global $wp_query;
+    // register our main script but do not enqueue it yet
+    wp_register_script( 'my_loadmore', get_stylesheet_directory_uri() . '/js/myloadmore.js', array('jquery') );
+    wp_enqueue_script( 'my_loadmore' );
+}
+
+add_action( 'wp_enqueue_scripts', 'misha_my_load_more_scripts' );
+
+function misha_loadmore_ajax_handler(){
+    $args = unserialize( stripslashes( $_POST['query'] ) );
+    $args['paged'] = $_POST['page'] + 1;
+    $args['post_status'] = 'publish';
+    $other = new WP_Query($args);
+    if( $other->have_posts() ) :?>
+        <?php
+            $maxCount = $other->post_count;
+            $i = 0;
+        ?>
+        <section class="section section-bg">
+            <div class="center-wrapper">
+                <?php if($i+3 < $maxCount):?>
+                    <div class="line line_of-3">
+                        <?php set_query_var( 'date', true );?>
+                        <?php for ($i; $i < 3; $i++){
+                            set_query_var( 'buf', $other->posts[$i] );
+                            get_template_part('template-parts/card');
+                        }?>
+                    </div>
+                <?php endif;?>
+                <?php if($i+6 <= $maxCount):?>
+                    <div class="column_of-6">
+                        <?php set_query_var( 'date', false );?>
+                        <?php for ($i; $i < 9; $i++){
+                            set_query_var( 'buf', $other->posts[$i] );
+                            get_template_part('template-parts/card');
+                        }?>
+                    </div>
+                <?php endif;?>
+            </div>
+        </section>
+        <section class="section decorated-bottom">
+            <div class="center-wrapper">
+                <?php if($i + 4 < $maxCount):?>
+                    <div class="line line_of-4">
+                        <?php set_query_var( 'date', true );?>
+                        <?php for ($i; $i < 13; $i++){
+                            set_query_var( 'buf', $other->posts[$i] );
+                            get_template_part('template-parts/card');
+                        }?>
+                    </div>
+                <?php endif;?>
+            </div>
+        </section>
+        <section class="section section-bg">
+            <div class="center-wrapper">
+                <?php if($i + 3 < $maxCount):?>
+                    <div class="line line_of-3">
+                        <?php set_query_var( 'date', true );?>
+                        <?php for ($i; $i < 16; $i++){
+                            set_query_var( 'buf', $other->posts[$i] );
+                            get_template_part('template-parts/card');
+                        }?>
+                    </div>
+                <?php endif;?>
+                <?php if($i + 6 <= $maxCount):?>
+                    <div class="column_of-6">
+                        <?php set_query_var( 'date', false );?>
+                        <?php for ($i; $i < 22; $i++){
+                            set_query_var( 'buf', $other->posts[$i] );
+                            get_template_part('template-parts/card');
+                        }?>
+                    </div>
+                <?php endif;?>
+            </div>
+        </section>
+        <?php if($i + 4 <= $maxCount):?>
+            <section class="section decorated-bottom">
+                <div class="center-wrapper">
+                    <div class="line line_of-4">
+                        <?php set_query_var( 'date', true );?>
+                        <?php for ($i; $i < 26; $i++){
+                            set_query_var( 'buf', $other->posts[$i] );
+                            get_template_part('template-parts/card');
+                        }?>
+                    </div>
+                </div>
+            </section>
+        <?php endif;?>
+    <?php endif;
+    die();
+}
+
+
+
+add_action('wp_ajax_loadmore', 'misha_loadmore_ajax_handler'); // wp_ajax_{action}
+add_action('wp_ajax_nopriv_loadmore', 'misha_loadmore_ajax_handler'); // wp_ajax_nopriv_{action}
