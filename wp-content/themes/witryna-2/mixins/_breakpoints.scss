@@ -1,8 +1,9 @@
 $breakpoints: (
-  'tablet'  : 767px,
-  'desktop' : 1004px,
-  'nav-collapse' : 1038px,
-  'largedesktop': 1420px
+  'desktop-small': 1200px,
+  'tablet': 998px,
+  'tablet-small': 766px,
+  'mobile': 558px,
+  'mobile-small': 374px,
 );
 
 @mixin respond-to($breakpoint) {
@@ -12,7 +13,7 @@ $breakpoints: (
   // If the key exists in the map
   @if $value != null {
     // Prints a media query based on the value
-    @media (min-width: $value) {
+    @media (max-width: $value) {
       @content;
     }
   }

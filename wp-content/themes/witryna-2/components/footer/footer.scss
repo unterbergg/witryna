@@ -1,15 +1,39 @@
 footer {
   padding-top: 50px;
   padding-bottom: 70px;
-  margin-top: 45px;
   background: #222;
+  @include respond-to(tablet-small) {
+    padding-top: 30px;
+    padding-bottom: 40px;
+  }
   .center-wrapper {
-    width: 1200px;
+    max-width: 1200px;
     margin: 0 auto;
+    @include respond-to(desktop-small) {
+      max-width: 960px;
+    }
+    @include respond-to(tablet) {
+      max-width: 720px;
+    }
+    @include respond-to(tablet-small) {
+      max-width: 100%;
+      padding: 0 20px;
+    }
+    @include respond-to(mobile) {
+      max-width: 100%;
+      padding: 0 12px;
+    }
     .row {
       display: flex;
       justify-content: space-between;
+      @include respond-to(tablet-small) {
+        flex-wrap: wrap;
+      }
       .footer-menu{
+        @include respond-to(tablet-small) {
+          width: 100%;
+          margin-bottom: 15px;
+        }
         ul{
           display: flex;
           a{
@@ -19,6 +43,10 @@ footer {
             font-weight: 400;
             margin-right: 40px;
             text-decoration: none;
+            @include respond-to(tablet-small) {
+              font-size: 18px;
+              line-height: 26px;
+            }
           }
         }
       }

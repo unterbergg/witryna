@@ -29,7 +29,7 @@
                 <div class="header__columns">
                     <div class="header__column hidden" id="header-menu">
                         <nav id="site-navigation" class="main-navigation">
-                            <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'witryna-2' ); ?></button>
+                            <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"></button>
                             <?php
                             wp_nav_menu(
                                 array(
@@ -40,7 +40,7 @@
                             ?>
                         </nav><!-- #site-navigation -->
                     </div>
-                    <div class="header__column">
+                    <div class="header__column logo-wrapper">
                         <a href="/" class="logo">witryna#2</a>
                     </div>
                     <div class="header__column" id="header-togglers">
