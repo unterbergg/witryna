@@ -1,4 +1,7 @@
-<a href="<?php echo get_the_permalink($buf->ID)?>" class="card">
+<?php
+    $link = ($type == 'inner') ? get_the_permalink($buf->ID) : get_field('sourse', $buf->ID)['url'];
+?>
+<a href="<?php echo $link;?>" class="card">
     <div class="card-image">
         <?php if(get_the_post_thumbnail_url($buf->ID)):?>
             <img src="<?php echo get_the_post_thumbnail_url($buf->ID);?>">

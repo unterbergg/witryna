@@ -28,19 +28,55 @@
                         </nav><!-- #site-navigation -->
                     </div>
                     <div class="social-wrapper">
-                        <a class="social-item" href="#"><i class="fab fa-twitter"></i></a>
-                        <a class="social-item" href="#"><i class="fab fa-facebook-square"></i></a>
-                        <a class="social-item" href="#"><i class="fab fa-vk"></i></a>
-                        <a class="social-item" href="#"><i class="fab fa-telegram-plane"></i></a>
+                        <?php foreach (get_field('socials', 'option') as $key => $item):?>
+                            <a class="social-item" href="<?php echo $item;?>">
+                                <i class="fab fa-<?php echo $key;?>"></i>
+                            </a>
+                        <?php endforeach;?>
                     </div>
                 </div>
                 <div class="copyright">
-                    Copyright © 2020 «Indobu.news»<br>
-                    Seluruh hak cipta. Untuk anak di atas 16 tahun
+                    <?php echo get_field('copyright', 'option')?>
                 </div>
             </div><!-- .site-info -->
         </div>
 	</footer><!-- #colophon -->
+    <section class="popup" data-item="About">
+        <?php
+            $post_id = 27;
+            $post_content = get_post($post_id);
+            $content = $post_content->post_content;
+        ?>
+        <div id="about" class="modal-window">
+            <div class="modal-headline">
+                <?php echo apply_filters('the_title',$post_content->post_title);?>
+                <div class="modal-close">
+                    <i class="fa fa-times"></i>
+                </div>
+            </div>
+            <div class="modal-content">
+                <?php echo apply_filters('the_content',$content);?>
+            </div>
+        </div>
+    </section>
+    <section class="popup" data-item="Privacy Policy">
+        <?php
+            $post_id = 3;
+            $post_content = get_post($post_id);
+            $content = $post_content->post_content;
+        ?>
+        <div id="policy" class="modal-window">
+            <div class="modal-headline">
+                <?php echo apply_filters('the_title',$post_content->post_title);?>
+                <div class="modal-close">
+                    <i class="fa fa-times"></i>
+                </div>
+            </div>
+            <div class="modal-content">
+                <?php echo apply_filters('the_content',$content);?>
+            </div>
+        </div>
+    </section>
 </div><!-- #page -->
 
 <?php wp_footer(); ?>

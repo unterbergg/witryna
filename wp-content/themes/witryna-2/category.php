@@ -1,11 +1,11 @@
 <?php
 /**
- * Template name: Home Page
+ * The template for displaying category page
  */
 
 get_header();
 ?>
-
+<?php //dd(get_queried_object());?>
 <div class="homepage">
     <section class="section decorated-bottom">
         <div class="center-wrapper">
@@ -16,7 +16,14 @@ get_header();
                 <?php
                     $exclude = [];
                     $args = array(
-                        'posts_per_page' => 3
+                        'posts_per_page' => 3,
+                        'tax_query' => array(
+                            array(
+                                'taxonomy' => 'category',
+                                'field' => 'term_id',
+                                'terms' => get_queried_object()->term_id
+                            )
+                        )
                     );
                     $posts = new WP_Query( $args );
                 ?>
@@ -47,7 +54,14 @@ get_header();
                 <?php
                     $args = array(
                         'posts_per_page' => 4,
-                        'post__not_in' => $exclude
+                        'post__not_in' => $exclude,
+                        'tax_query' => array(
+                            array(
+                                'taxonomy' => 'category',
+                                'field' => 'term_id',
+                                'terms' => get_queried_object()->term_id
+                            )
+                        )
                     );
                     $posts = new WP_Query( $args );
                 ?>
@@ -82,7 +96,14 @@ get_header();
                 <?php
                     $args = array(
                         'posts_per_page' => 6,
-                        'post__not_in' => $exclude
+                        'post__not_in' => $exclude,
+                        'tax_query' => array(
+                            array(
+                                'taxonomy' => 'category',
+                                'field' => 'term_id',
+                                'terms' => get_queried_object()->term_id
+                            )
+                        )
                     );
                     $posts = new WP_Query( $args );
                 ?>
@@ -110,7 +131,14 @@ get_header();
     <?php
         $args = array(
             'posts_per_page' => 13,
-            'post__not_in' => $exclude
+            'post__not_in' => $exclude,
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'category',
+                    'field' => 'term_id',
+                    'terms' => get_queried_object()->term_id
+                )
+            )
         );
         $posts = new WP_Query( $args );
 

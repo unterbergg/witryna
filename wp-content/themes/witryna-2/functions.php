@@ -229,10 +229,11 @@ function misha_loadmore_ajax_handler(){
         <?php
             $maxCount = $other->post_count;
             $i = 0;
+            set_query_var( 'type', $_POST['type'] );
         ?>
         <section class="section section-bg">
             <div class="center-wrapper">
-                <?php if($i+3 < $maxCount):?>
+                <?php if($i+3 <= $maxCount):?>
                     <div class="line line_of-3">
                         <?php set_query_var( 'date', true );?>
                         <?php for ($i; $i < 3; $i++){
@@ -240,6 +241,8 @@ function misha_loadmore_ajax_handler(){
                             get_template_part('template-parts/card');
                         }?>
                     </div>
+                <?php else:?>
+                    <?php exit;?>
                 <?php endif;?>
                 <?php if($i+6 <= $maxCount):?>
                     <div class="column_of-6">
@@ -249,41 +252,8 @@ function misha_loadmore_ajax_handler(){
                             get_template_part('template-parts/card');
                         }?>
                     </div>
-                <?php endif;?>
-            </div>
-        </section>
-        <section class="section decorated-bottom">
-            <div class="center-wrapper">
-                <?php if($i + 4 < $maxCount):?>
-                    <div class="line line_of-4">
-                        <?php set_query_var( 'date', true );?>
-                        <?php for ($i; $i < 13; $i++){
-                            set_query_var( 'buf', $other->posts[$i] );
-                            get_template_part('template-parts/card');
-                        }?>
-                    </div>
-                <?php endif;?>
-            </div>
-        </section>
-        <section class="section section-bg">
-            <div class="center-wrapper">
-                <?php if($i + 3 < $maxCount):?>
-                    <div class="line line_of-3">
-                        <?php set_query_var( 'date', true );?>
-                        <?php for ($i; $i < 16; $i++){
-                            set_query_var( 'buf', $other->posts[$i] );
-                            get_template_part('template-parts/card');
-                        }?>
-                    </div>
-                <?php endif;?>
-                <?php if($i + 6 <= $maxCount):?>
-                    <div class="column_of-6">
-                        <?php set_query_var( 'date', false );?>
-                        <?php for ($i; $i < 22; $i++){
-                            set_query_var( 'buf', $other->posts[$i] );
-                            get_template_part('template-parts/card');
-                        }?>
-                    </div>
+                <?php else:?>
+                    <?php exit;?>
                 <?php endif;?>
             </div>
         </section>
@@ -292,19 +262,58 @@ function misha_loadmore_ajax_handler(){
                 <div class="center-wrapper">
                     <div class="line line_of-4">
                         <?php set_query_var( 'date', true );?>
-                        <?php for ($i; $i < 26; $i++){
+                        <?php for ($i; $i < 13; $i++){
                             set_query_var( 'buf', $other->posts[$i] );
                             get_template_part('template-parts/card');
                         }?>
                     </div>
                 </div>
             </section>
+        <?php else:?>
+            <?php exit;?>
         <?php endif;?>
     <?php endif;
     die();
 }
 
+add_action('wp_ajax_loadmore', 'misha_loadmore_ajax_handler');
+add_action('wp_ajax_nopriv_loadmore', 'misha_loadmore_ajax_handler');
 
+function link_shortcode($attr) {
+    $result = "";
 
-add_action('wp_ajax_loadmore', 'misha_loadmore_ajax_handler'); // wp_ajax_{action}
-add_action('wp_ajax_nopriv_loadmore', 'misha_loadmore_ajax_handler'); // wp_ajax_nopriv_{action}
+    $result .= "
+        <div class='linc-wrapper'>
+            <a href='{$attr['link']}' class='card'>
+                <div class='card-image'>
+                    <img src='{$attr['img']}'>
+                </div>
+                <div class='content'>
+                    <div class='title'>{$attr['title']}</div>
+                    <div class='post-date'>
+                        <i class='far fa-calendar-alt'></i>
+                        <span class='date'>{$attr['date']}</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    ";
+
+    return $result;
+}
+add_shortcode('wtrn_link', 'link_shortcode');
+
+add_filter('nav_menu_css_class' , 'special_nav_class' , 10 , 2);
+
+function special_nav_class ($classes, $item) {
+    if (in_array('current-menu-item', $classes) ){
+        $classes[] = 'active ';
+    }
+    return $classes;
+}
+
+if( function_exists('acf_add_options_page') ) {
+
+    acf_add_options_page();
+
+}
